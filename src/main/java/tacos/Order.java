@@ -21,6 +21,7 @@ public class Order implements Serializable { // spring data jpa
 
     private static final long serialVersionUID = 1L; // spring data jpa
 
+
     // spring data jpa
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -28,6 +29,8 @@ public class Order implements Serializable { // spring data jpa
 
     private Date placedAt;
 
+    @ManyToOne
+    private User user;
 
     @NotBlank(message="Delivery name is required")
     private String deliveryName;
