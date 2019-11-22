@@ -1,0 +1,8 @@
+#spring:
+#  datasource:
+#  url: jdbc:mysql://localhost/example
+#  username: root
+#  password: 1234
+#logging:
+#  level:
+#  tacos: WARN
