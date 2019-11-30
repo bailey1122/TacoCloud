@@ -2,6 +2,46 @@ taco:
   orders:
     pageSize: 10
 
+  discount:
+    codes:
+      abcdef: 10
+
+---
+spring:
+  profiles: prod
+
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/example
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+  kafka:
+    bootstrap-servers:
+      - localhost:9092
+    template:
+      default-topic: tacocloud
+    producer:
+      keySerializer: org.springframework.kafka.support.serializer.JsonSerializer
+      valueSerializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+logging:
+  level:
+    tacos: WARN
+
+#spring:
+#  data:
+#    rest:
+#      base-path: /api
+#
+#  kafka:
+#    template:
+#      default-topic: tacocloud.orders.topic
+
 #server:
 #  port: 9090
 #  ssl:
@@ -61,3 +101,26 @@ taco:
 #logging:
 #  level:
 #  tacos: WARN
+
+
+#spring:
+#  artemis:
+#    host: artemis.tacocloud.com
+#    port: 61617
+#    user: tacoweb
+#    password: l3tm31n
+
+#spring:
+#  activemq:
+#  broker-url: tcp://activemq.tacocloud.com
+#  user: tacoweb
+#  password: l3tm31n
+#  in-memory: false
+
+
+#spring:
+#  kafka:
+#    bootstrap-servers:
+#      - kafka.tacocloud.com:9092
+#      - kafka.tacocloud.com:9093
+#      - kafka.tacocloud.com:9094

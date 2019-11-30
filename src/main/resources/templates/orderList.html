@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Taco Cloud</title>
+    </head>
+    <body>
+
+        <h1>Your orders</h1>
+
+
+        <ul>
+            <li th:each="order : ${orders}">
+                <span th:text="${order.placedAt}">DATE</span> -
+                <span th:text="${order.deliveryName}">NAME</span>
+                <ul>
+                    <li th:each="taco : ${order.tacos}">
+                        <span th:text="${taco.name}"></span> :
+                        <span th:each="ingredient : ${taco.ingredients}">
+                            <span th:text="${ingredient.name}">INGREDIENT</span>,
+                        </span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </body>
+</html>

@@ -11,8 +11,7 @@
             <input type="submit" value="Logout"/>
         </form>
 
-        <form method="POST" th:action="@{/orders}" th:object="${order}"
-              id="orderForm">
+        <form method="POST" th:action="@{/orders}" th:object="${order}" id="orderForm">
             <h1>Order your taco creations!</h1>
 
             <img th:src="@{/images/taco.jpg}"/>
@@ -24,9 +23,9 @@
             </ul>
 
             <div th:if="${#fields.hasErrors()}">
-            <span class="validationError">
-            Please correct the problems below and resubmit.
-            </span>
+        <span class="validationError">
+        Please correct the problems below and resubmit.
+        </span>
             </div>
 
             <h3>Deliver my taco masterpieces to...</h3>

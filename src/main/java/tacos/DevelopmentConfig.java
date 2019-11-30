@@ -1,34 +1,25 @@
 package tacos;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import tacos.data.IngredientRepository;
+import tacos.data.TacoRepository;
+import tacos.data.UserRepository;
 
 import tacos.Ingredient.Type;
-import tacos.yamlconf.YAMLConfig;
 
-@SpringBootApplication
-public class TacoCloudApplication implements CommandLineRunner {
+import java.util.Arrays;
 
-    @Autowired
-    private YAMLConfig myConfig;
-
-    public static void main(String[] args) {
-        SpringApplication.run(TacoCloudApplication.class, args);
-    }
-
-    @Override
-    public void run(String... args) throws Exception {
-        System.out.println("using environment: " + myConfig.getEnvironment());
-        System.out.println("name: " + myConfig.getName());
-        System.out.println("servers: " + myConfig.getServers());
-    }
+@Profile("!prod") // bean will be created if the prod profile is't active
+@Configuration
+public class DevelopmentConfig {
 
     @Bean
-    public CommandLineRunner dataLoader(IngredientRepository repo) {
+    public CommandLineRunner dataLoader(IngredientRepository repo,
+                                        UserRepository userRepo, PasswordEncoder encoder) { // user repo for ease of testing with a built-in user
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
@@ -42,6 +33,11 @@ public class TacoCloudApplication implements CommandLineRunner {
                 repo.save(new Ingredient("JACK", "Monterrey Jack", Type.CHEESE));
                 repo.save(new Ingredient("SLSA", "Salsa", Type.SAUCE));
                 repo.save(new Ingredient("SRCR", "Sour Cream", Type.SAUCE));
+
+
+                userRepo.save(new User("habuma", encoder.encode("password"),
+                        "Craig Walls", "123 North Street", "Cross Roads", "TX",
+                        "76227", "123-123-1234"));
             }
         };
     }
