@@ -21,7 +21,6 @@ public class Order implements Serializable { // spring data jpa
 
     private static final long serialVersionUID = 1L; // spring data jpa
 
-
     // spring data jpa
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)

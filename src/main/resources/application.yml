@@ -29,6 +29,20 @@ spring:
       keySerializer: org.springframework.kafka.support.serializer.JsonSerializer
       valueSerializer: org.springframework.kafka.support.serializer.JsonSerializer
 
+#  rabbitmq:
+#    host: rabbit.tacocloud.com
+#    port: 5672
+#    username: tacoweb
+#    password: l3tm31n
+#    template:
+#      exchange: tacocloud.orders
+#      routing-key: kitchens.central
+#      receive-timeout: 30000
+
+  jms:
+    template:
+      default-destination: tacocloud.order.queue
+
 logging:
   level:
     tacos: WARN

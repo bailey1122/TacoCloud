@@ -1,4 +1,4 @@
-package tacos.messagingkafka;
+package tacos.messaging;
 
 import tacos.Order;
 
